@@ -26,7 +26,6 @@
 
 ### To do
 - [ ] Memcached Config
-- [ ] Multiple Session Declaration Bug
 
 ### License
 [MIT License](https://github.com/haricnugraha/docker-codeigniter2/blob/master/LICENSE)
