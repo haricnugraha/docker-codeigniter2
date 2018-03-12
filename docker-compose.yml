@@ -1,8 +1,9 @@
-version: '3'
+version: '3.1'
 
 services:
   nginx:
     build: ./nginx/
+    container_name: docker-hargadunia-nginx
     ports:
       - 8080
     depends_on:
@@ -13,6 +14,7 @@ services:
       - VIRTUAL_HOST=${HOSTNAME}
   php:
     build: ./php/
+    container_name: docker-hargadunia-php
     expose:
       - 9000
     depends_on:
@@ -22,6 +24,7 @@ services:
       - ./www/:/var/www/html
   mysql:
     image: mariadb:latest
+    container_name: docker-hargadunia-mariadb
     ports:
       - 3306
     volumes:
@@ -35,6 +38,7 @@ services:
     restart: always
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
+    container_name: docker-hargadunia-phpmyadmin
     depends_on:
       - mysql
     ports:
@@ -43,7 +47,7 @@ services:
       PMA_HOST: mysql
       VIRTUAL_HOST: ${PHPMYADMIN_HOST}
   # memcached:
-  #   image: memcached:latest
+  #   image: memcached:alpine
   #   ports:
   #     - 11211:11211
   #   restart: always
@@ -66,6 +70,7 @@ services:
   
   nginx-proxy:
     image: jwilder/nginx-proxy:alpine
+    container_name: docker-hargadunia-nginx-proxy
     ports:
       - "80:80"
     volumes:

@@ -9,11 +9,10 @@
 
 ### Import Database
 1. Run ``docker ps``
-2. Find mariadb container names, it should be dockercodeigniter2_mysql_1 if you clone this repository
-3. Run ``docker exec -it ${mariadb_container_name} /bin/bash``
-4. Run ``mysql -u root -p -D ${MYSQL_DATABASE} < /docker-entrypoint-initdb.d/dump.sql``
-5. Enter password which is ``${MYSQL_PASSWORD}``
-6. Make a cup of coffee is a good idea, it will takes a while to import the database
+2. Run ``docker exec -it docker-hargadunia-mariadb /bin/bash``
+3. Run ``mysql -u root -p -D ${MYSQL_DATABASE} < /docker-entrypoint-initdb.d/dump.sql``
+4. Enter password which is ``${MYSQL_PASSWORD}``
+5. Make a cup of coffee is a good idea, it will takes a while to import the database
 
 *Note: phpmyadmin would serve on ${PHPMYADMIN_HOST}*
 
