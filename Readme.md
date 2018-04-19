@@ -22,6 +22,7 @@
 
 ### Temporary Solution for Memcached
 1. Change ``system/libraries/Cache/Cache.php with Cache.php``
+2. Create new folder in ``system/`` with the name ``cache``
 
 ### To do
 - [ ] Memcached Config
