@@ -328,7 +328,7 @@ class Cache
     {
         $dir = ($cache_group != null) ? md5($cache_group) . $this->options['group_postfix'] : '';
 
-        return BASEPATH . $this->options['dir'] . '/' . $dir;
+        return BASEPATH . $this->options['dir'] . $dir;
     }
 
 }
