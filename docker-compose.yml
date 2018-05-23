@@ -1,77 +1,32 @@
-version: '3.1'
+version: '3'
+
+networks:
+  mysql-net:
+    external:
+      name: ${MYSQL_DOCKER_NETWORK}
 
 services:
   nginx:
     build: ./nginx/
     container_name: hargadunia-nginx
     ports:
-      - 8080
+      - "80:80"
     depends_on:
       - php
     volumes:
     - ./www/:/var/www/html
     environment:
       - VIRTUAL_HOST=${HOSTNAME}
+    networks:
+      - mysql-net
+    restart: always
   php:
     build: ./php/
     container_name: hargadunia-php
     expose:
       - 9000
-    depends_on:
-      - mysql
-      # - memcached
     volumes:
       - ./www/:/var/www/html
-  mysql:
-    image: mariadb:latest
-    container_name: hargadunia-mariadb
-    ports:
-      - 3306
-    volumes:
-      - /var/lib/mysql
-      - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    networks:
+      - mysql-net
     restart: always
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
-    container_name: hargadunia-phpmyadmin
-    depends_on:
-      - mysql
-    ports:
-     - 2112:2112
-    environment:
-      PMA_HOST: mysql
-      VIRTUAL_HOST: ${PHPMYADMIN_HOST}
-  # memcached:
-  #   image: memcached:alpine
-  #   ports:
-  #     - 11211:11211
-  #   restart: always
-  # redis:
-  #   image: redis
-  #   ports:
-  #     - "6379:6379"
-  
-  # elasticsearch:
-  # image: elasticsearch
-  # ports:
-  #   - "9200:9200"
-  #   - "9300:9300"
-
-  # rabbitmq:
-  #   image: rabbitmq:3.6.1-management
-  #   ports:
-  #     - "15672:15672"
-  #     - "5672:5672"
-  
-  nginx-proxy:
-    image: jwilder/nginx-proxy:alpine
-    container_name: hargadunia-nginx-proxy
-    ports:
-      - "80:80"
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro

@@ -2,23 +2,13 @@
 
 ### Getting Started
 1. Clone This Repository
-2. Clone your PHP project to this repo and renamed it to www
-2. Add ``dump.sql`` to this repo for initialize database
+2. Put your codeigniter project to www folder
+3. Add ``dump.sql`` to this repo for initialize database
 4. Change .env file to your local variable
-5. Run ``docker-compose up -d``
+5. Run ``sudo docker-compose up -d``
 
-### Import Database
-1. Run ``docker ps``
-2. Run ``docker exec -it hargadunia-mariadb ../bin/bash``
-3. Run ``mysql -u root -p -D ${MYSQL_DATABASE} < /docker-entrypoint-initdb.d/dump.sql``
-4. Enter password which is ``${MYSQL_PASSWORD}``
-5. Make a cup of coffee is a good idea, it will takes a while to import database
-
-*Note: phpmyadmin would serve on ${PHPMYADMIN_HOST}*
-
-### Database Config on Codeigniter 2
-1. Open ``application/config/database.php``
-2. Change hostname to ``mysql``
+### Database on Codeigniter 2
+1. to install database refer to this repository https://github.com/haricnugraha/docker-mysql-phpmyadmin
 
 ### Temporary Solution for Memcached
 1. Create new folder named ``cache`` in ``system/``
