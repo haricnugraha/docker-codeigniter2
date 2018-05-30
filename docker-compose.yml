@@ -1,25 +1,19 @@
 version: '3'
 
-networks:
-  mysql-net:
-    external:
-      name: ${MYSQL_DOCKER_NETWORK}
-
 services:
   nginx:
     build: ./nginx/
     container_name: hargadunia-nginx
     ports:
-      - "80:80"
+      - 80
     depends_on:
       - php
     volumes:
     - ./www/:/var/www/html
-    environment:
-      - VIRTUAL_HOST=${HOSTNAME}
     networks:
-      - mysql-net
-    restart: always
+      mysql-net:
+        ipv4_address: ${NGINX_IP}
+    restart: unless-stopped
   php:
     build: ./php/
     container_name: hargadunia-php
@@ -28,5 +22,11 @@ services:
     volumes:
       - ./www/:/var/www/html
     networks:
-      - mysql-net
-    restart: always
+      mysql-net:
+        ipv4_address: ${PHP_IP}
+    restart: unless-stopped
+
+networks:
+  mysql-net:
+    external:
+      name: ${MYSQL_DOCKER_NETWORK}

@@ -1,11 +1,11 @@
 ## Dockerize Nginx - PHP 5.6 - MariaDB - PHPMyAdmin - Reverse Proxy
 
 ### Getting Started
-1. Clone This Repository
+1. Clone/Download This Repository
 2. Put your codeigniter project to www folder
-3. Add ``dump.sql`` to this repo for initialize database
-4. Change .env file to your local variable
-5. Run ``sudo docker-compose up -d``
+3. Change .env file to your local variable
+4. Run ``sudo docker-compose up -d``
+5. Run the default IP 172.8.0.101 in your browser
 
 ### Database on Codeigniter 2
 1. to install database refer to this repository https://github.com/haricnugraha/docker-mysql-phpmyadmin
